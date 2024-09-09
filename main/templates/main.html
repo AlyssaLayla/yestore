@@ -1,21 +1,21 @@
 <h1>Welcome to YESTORE!</h1>
 
-<h5>Nama Mahasiswa: </h5>
+<h2>Nama Mahasiswa: </h2>
 <p>{{ nama }}</p>
-<h5>Kelas: </h5>
+<h2>Kelas: </h2>
 <p>{{ kelas }}</p>
-<h5>NPM: </h5>
+<h2>NPM: </h2>
 <p>{{ npm }}</p>
 
+<h3>Apa yang Kami Jual?</h3>
 <ol>
     {% for product in products %}
     <li> 
-        <h2>{{product.name}}</h2>
-        <h2>Rp{{product.price}}</h2>
-        <h2>Quantity: {{product.quantity}}</h2>
-        <p>Description: {{product.description}}</p>
-        <h2>Category: {{product.category}}</h2>
+        <h4>{{product.name}}</h4>
+        <h5>Rp{{product.price}}</h5>
+        <h5>Quantity: {{product.quantity}}</h5>
+        <p>{{product.description}}</p>
+        <h5>Category: {{product.category}}</h5>
         {% endfor %}
     </li>
-
 </ol>
