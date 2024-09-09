@@ -1,8 +1,21 @@
-<h1>YESTORE - Menjual semuanya dengan YESENANG</h1>
+<h1>Welcome to YESTORE!</h1>
 
-<h5>Name: </h5>
-<p>{{ name }}<p>
-<h5>Price: </h5>
-<p>{{ price }}<p>
-<h5>Description: </h5>
-<p>{{ description }}<p>
+<h5>Nama Mahasiswa: </h5>
+<p>{{ nama }}</p>
+<h5>Kelas: </h5>
+<p>{{ kelas }}</p>
+<h5>NPM: </h5>
+<p>{{ npm }}</p>
+
+<ol>
+    {% for product in products %}
+    <li> 
+        <h2>{{product.name}}</h2>
+        <h2>Rp{{product.price}}</h2>
+        <h2>Quantity: {{product.quantity}}</h2>
+        <p>Description: {{product.description}}</p>
+        <h2>Category: {{product.category}}</h2>
+        {% endfor %}
+    </li>
+
+</ol>
