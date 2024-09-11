@@ -300,7 +300,7 @@ NPM     : 2306152052
 
 ## Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
 
-![Bagan](yestore/bagan.png)
+![Bagan](/yestore/bagan.png)
 
 - Alur keseluruhan: 
     - Client/user melakukan request -> Internet melanjutkan request -> urls.py melanjutkan request -> views.py melanjutkan ke models.py dan template (main.html)
