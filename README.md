@@ -303,7 +303,7 @@ NPM     : 2306152052
 ![Bagan](/bagan.png)
 
 - Alur keseluruhan: 
-    - Client/user melakukan request -> Internet melanjutkan request -> `urls.py` melanjutkan request -> `views.py` melanjutkan ke `models.py` dan template `main.html`
+    - Client/user melakukan request -> Internet melanjutkan request -> `urls.py` melanjutkan request berupa route -> `views.py` melanjutkan ke `models.py` dan template `main.html`
     - `views.py` ke `models.py`
     `views.py` melakukan transaksi data modification ke `models.py` -> `models.py` mengakses database untuk melakukan modifikasi data. Lalu setelah dimodifikasi sesuai request akan dikembalikan ke `models.py` dan dilanjutkan memberi data yang lengkap ke `views.py`
     - `views.py` ke template `main.html`
