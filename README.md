@@ -303,15 +303,15 @@ NPM     : 2306152052
 ![Bagan](/bagan.png)
 
 - Alur keseluruhan: 
-    - Client/user melakukan request -> Internet melanjutkan request -> urls.py melanjutkan request -> views.py melanjutkan ke models.py dan template (main.html)
-    - views.py ke models.py
-    views.py melakukan transaksi data modification ke models.py -> models.py mengakses database untuk melakukan modifikasi data. Lalu setelah dimodifikasi sesuai request akan dikembalikan ke models.py dan dilanjutkan memberi data yang lengkap ke views.py
-    - views.py ke template (main.html)
-    views.py melakukan display data ke template (main.html) -> Kemudian dikembalikan data input input by user ke views.py
-    - Setelah dari models.py dan main.html sudah lengkap tergabung semua di views.py -> Dikembalikan responnya ke internet berdasarkan request klien -> Kemudian dari internet akan diberkan ke klien berupa web page sesuai request
+    - Client/user melakukan request -> Internet melanjutkan request -> `urls.py` melanjutkan request -> `views.py` melanjutkan ke `models.py` dan template `main.html`
+    - `views.py` ke `models.py`
+    `views.py` melakukan transaksi data modification ke `models.py` -> `models.py` mengakses database untuk melakukan modifikasi data. Lalu setelah dimodifikasi sesuai request akan dikembalikan ke `models.py` dan dilanjutkan memberi data yang lengkap ke `views.py`
+    - `views.py` ke template `main.html`
+    `views.py` melakukan display data ke template `main.html` -> Kemudian dikembalikan data input by user ke `views.py`
+    - Setelah dari `models.py` dan `main.html` sudah lengkap tergabung semua di `views.py` -> Dikembalikan responnya ke internet berdasarkan request klien -> Kemudian dari internet akan diberkan ke klien berupa web page sesuai request
 
-- Kaitan antara urls.py, views.py, models.py, dan berkas html
-Kaitan antara urls.py, views.py, models.py, dan berkas html dapat dilihat di alur yang sudah saya jelaskan sebelumnya. `urls.py` dilakukan untuk konfigurasi routing dan dilanjutkan ke `views.py`. File ini sebagai logika aplikasi untuk data organization/preparation layer yang akan meneruskan ke models.py (Database layer) dan berkas .`html` (Tampilan pengguna). Ketika models.py dan berkas html sudah melakukan request pengguna, kedua bagian tersebut dikembalikan lagi ke views.py. Pada kondisi ini, views.py sudah berisi html merged dengan database yang dibutuhkan dari model. Setelah itu views.py akan meneruskan ke internet dan diteruskan kembali ke klien sebagai web page.
+- Kaitan antara `urls.py`, `views.py`, `models.py`, dan berkas `.html`
+Kaitan antara `urls.py`, `views.py`, `models.py`, dan berkas `.html `dapat dilihat di alur yang sudah saya jelaskan sebelumnya. `urls.py` dilakukan untuk konfigurasi routing dan dilanjutkan ke `views.py`. File ini sebagai logika aplikasi untuk data organization/preparation layer yang akan meneruskan ke `models.py` (Database layer) dan berkas .`html` (Tampilan pengguna). Ketika `models.py` dan berkas `.html` sudah melakukan request pengguna, kedua bagian tersebut dikembalikan lagi ke `views.py`. Pada kondisi ini, `views.py` sudah berisi html merged dengan database yang dibutuhkan dari model. Setelah itu `views.py` akan meneruskan ke internet dan diteruskan kembali ke klien sebagai web page.
 
 ## Jelaskan fungsi git dalam pengembangan perangkat lunak!
 - Versi Kontrol
