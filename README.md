@@ -7,21 +7,21 @@
 ## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekedar mengikuti tutorial)!
 
 - Membuat sebuah proyek Django baru. <br>
-    A. Menginsiasi Git pada Directory Baru
-    1. Melakukan konfigurasi awal git dengan membuat directory baru di lokal bernama 'yestore'.
-    2. Membuka terminal, kemudian melakukan cd ke directory path yestore yang baru saya buat. Kemudian melakukan perintah 'git init', 'git config --global user.name "AlyssaLayla"', dan 'git config --global user.email "alyssasasti@gmail.com"'
-    3. membuat repositori baru di GitHub dengan nama yestore dan mengatur visibilitasnya sebagai public
-    4. Membuat 'README.md', 'git status', 'git add README.md'. Kemudian saya mengecek kembali status README.md dengan 'git status'. Lalu jalankan 'git commit -m "Make README.md"'
-    4. Membuat branch utama dengan menjalankan perintah 'git branch -M main'. Dengan menjalankan perintah ini, branch utamanya akan bernaama "main".
-    5. Menjalankan perintah 'git remote add origin https://github.com/AlyssaLayla/yestore.git'
-    6. Menjalankan 'git push -u origin main'
+    1. Menginsiasi Git pada Directory Baru
+    -  Melakukan konfigurasi awal git dengan membuat directory baru di lokal bernama 'yestore'.
+    - Membuka terminal, kemudian melakukan cd ke directory path yestore yang baru saya buat. Kemudian melakukan perintah 'git init', 'git config --global user.name "AlyssaLayla"', dan 'git config --global user.email "alyssasasti@gmail.com"'
+    -  membuat repositori baru di GitHub dengan nama yestore dan mengatur visibilitasnya sebagai public
+    -  Membuat 'README.md', 'git status', 'git add README.md'. Kemudian saya mengecek kembali status README.md dengan 'git status'. Lalu jalankan 'git commit -m "Make README.md"'
+    - Membuat branch utama dengan menjalankan perintah 'git branch -M main'. Dengan menjalankan perintah ini, branch utamanya akan bernaama "main".
+    - Menjalankan perintah 'git remote add origin https://github.com/AlyssaLayla/yestore.git'
+    - Menjalankan 'git push -u origin main'
 
-    B. Mengaktifkan Virtual Environment
-    1. Menjalankan perintah 'python -m venv env' dan 'env\Scripts\activate'
+    2. Mengaktifkan Virtual Environment
+    -  Menjalankan perintah 'python -m venv env' dan 'env\Scripts\activate'
     Notes: Ditandai dengan adanya (env) pada awal baris di terminal
 
-    C. Install Dependencies
-    1. Membuat file baru bernama 'requirements.txt' dan mengeditnya melalui IDE dengan isi:
+    3. Install Dependencies
+    - Membuat file baru bernama 'requirements.txt' dan mengeditnya melalui IDE dengan isi:
     ''' bash
     django
     gunicorn
@@ -30,14 +30,15 @@
     requests
     urllib3
     '''
-    2. Instalasi dependencies yang ada di file 'requirements.txt' dengan perintah 'pip install -r requirements.txt'
+    - Instalasi dependencies yang ada di file 'requirements.txt' dengan perintah 'pip install -r requirements.txt'
     
-    D. Membuat Proyek Django
-    1. Menjalankan perintah 'django-admin startproject yestore' untuk membuat proyek Django bernama yestore
+    4. Membuat Proyek Django
+    - Menjalankan perintah 'django-admin startproject yestore' untuk membuat proyek Django bernama yestore
 
-    E. Mempersiapkan untuk Menjalankan Server
-    1. Mengedit file 'settings.py' kemudian menambahkan "localhost" dan "127.0.0.1" pada 'ALLOWED-HOSTS'
-    2. Membuat file baru bernama '.gitignore' dan mengeditnya melalui iDE dengan isi:
+    5. Mempersiapkan untuk Menjalankan Server
+    - Mengedit file 'settings.py' kemudian menambahkan "localhost" dan "127.0.0.1" pada 'ALLOWED-HOSTS'
+    - Membuat file baru bernama '.gitignore' dan mengeditnya melalui iDE dengan isi:
+
     ''' bash
     # Django
     *.log
@@ -181,15 +182,15 @@
     <hr>
 
 - Membuat aplikasi dengan nama 'main' pada proyek tersebut. <br>
-    1. Menjalankan perintah 'python manage.py startapp main'
-    2. Mengedit file 'settings.py' dan menambahkan 'main' pada 'INSTALLED_APPS'
-    3. Membuat directory (folder) baru bernama 'templates' di dalam directory 'main'. Kemudian di dalam folder ini, buat file baru bernama 'main.html' untuk menyimpan file '.html' yang ingin digunakan. File ini berisi konten yang ingin ditampilkan di web. Bagian yang wajib ada adalah nama e-commerce, nama mahasiswa, dan kelas.
+    - Menjalankan perintah 'python manage.py startapp main'
+    - Mengedit file 'settings.py' dan menambahkan 'main' pada 'INSTALLED_APPS'
+    - Membuat directory (folder) baru bernama 'templates' di dalam directory 'main'. Kemudian di dalam folder ini, buat file baru bernama 'main.html' untuk menyimpan file '.html' yang ingin digunakan. File ini berisi konten yang ingin ditampilkan di web. Bagian yang wajib ada adalah nama e-commerce, nama mahasiswa, dan kelas.
     <hr>
 
 - Melakukan routing pada proyek agar dapat menjalankan aplikasi main. <br>
-    1. Mengonfigurasi routing URL pada proyek yestore. Buka file 'urls.py' di dalam directory proyek 'yestore'
-    2. Menambahkan import 'include' pada 'from django.urls import path, include'
-    3. Menambahkan route url dengan mengarahkan ke tampilan 'main' di dalam variabel 'urlpatterns' menjadi
+    - Mengonfigurasi routing URL pada proyek yestore. Buka file 'urls.py' di dalam directory proyek 'yestore'
+    - Menambahkan import 'include' pada 'from django.urls import path, include'
+    - Menambahkan route url dengan mengarahkan ke tampilan 'main' di dalam variabel 'urlpatterns' menjadi
     '''python
     urlpatterns = [
     path('admin/', admin.site.urls),
@@ -199,7 +200,7 @@
     <hr>
 
 - Membuat model pada aplikasi main dengannama Product dan memiliki atribut wajib ('name' (CharField), 'price' (IntegerField), dan 'description' (TextField)) <br>
-    1. Mengedit file 'models.py' pada directory 'main' dengan:
+    - Mengedit file 'models.py' pada directory 'main' dengan:
     '''python
     from django.db import models
 
@@ -210,14 +211,14 @@
         description = models.TextField(name="description")
         category = models.CharField(max_length=255, name="category")
     '''
-        Notes: 
-        Saya mengisi 'models.py' dengan 5 atributes yaitu 'name' (CharField), 'price' (IntegerField), 'quantity' (IntegerFIeld), 'description' (TextField), dan 'category' (CharField)
+    Notes: 
+    Saya mengisi 'models.py' dengan 5 atributes yaitu 'name' (CharField), 'price' (IntegerField), 'quantity' (IntegerFIeld), 'description' (TextField), dan 'category' (CharField)
 
-    2. Menjalankan perintah 'python manage.py makemigrations' dan 'python manage.py migrate' setiap kita membuat perubahan pada model
+    - Menjalankan perintah 'python manage.py makemigrations' dan 'python manage.py migrate' setiap kita membuat perubahan pada model
     <hr>
 
 -  Membuat sebuah fungsi pada views.py untuk dikembalikan ke dalam sebuah template HTML yang menampilkan nama aplikasi serta nama dan kelas mahasiswa. <br>
-    1. Mengedit 'views.py' pada 'main' dengan kode: 
+    - Mengedit 'views.py' pada 'main' dengan kode: 
     '''python
     from django.shortcuts import render
 
@@ -235,9 +236,9 @@
 
         return render(request, "main.html", context)
     '''
-        Notes: Selain ingin menampilkan nama aplikasi, nama mahasiswa, dan kelasnya, saya ingin menampilkan atribut-atribut lain. Maka dari itu di 'views.py' saya,
+    Notes: Selain ingin menampilkan nama aplikasi, nama mahasiswa, dan kelasnya, saya ingin menampilkan atribut-atribut lain. Maka dari itu di 'views.py' saya,
 
-    2. Saya menambahkan tampilan yang saya inginkan di 'main.htm' agar dapat menampilkan data yang telah diambil dari model sebagai berikut
+    - Saya menambahkan tampilan yang saya inginkan di 'main.htm' agar dapat menampilkan data yang telah diambil dari model sebagai berikut
     '''html
     <h1>Welcome to YESTORE!</h1>
 
@@ -264,7 +265,7 @@
     <hr>
 
 - Membuat sebuah routing pada 'urls.py' aplikasi main untuk memetakan fungsi yang telah dibuat pada 'views.py' <br>
-    1. Buka file 'urls.py di 'main', kemudian isi dengan kode ini
+    - Buka file 'urls.py di 'main', kemudian isi dengan kode ini
     '''python
     from django.urls import path
     from main.views import show_main
@@ -278,37 +279,38 @@
     <hr>
 
 - Membuat deployment ke PWS terhadap aplikasi yang sudah dibuat sehingga nantinya dapat diakses di internet <br>
-    1. Sebelum ke PWS, saya melakukan 'git add .', 'git commit -m "<message>"', dan 'git push -u origin main' untuk mengupdate perubahan ke GitHub
-    2. Saya mencoba run di local host terlebih dahulu. Jalankan perintah 'manage.py runserver' kemudian saya cek di 'http://localhost:8000/'. Jika halaman yang saya buat sudah muncul, saya lanjut deploy ke PWS
-    3. Login di PWS, lalu menambahkan projek baru dengan nama 'yestore'
-    4. Buka kembali 'settings.py' kemudian tambahkan 'alyssa-layla-yestore.pbp.cs.ui.ac.id' di 'ALLOWED_HOSTS'
-    5. Melakukan kembali 'git add .', 'git commit -m"<messahe>"', dan 'git push -u origin main'
-    6. Menjalankan perintah 'git remote add pws http://pbp.cs.ui.ac.id/alyssa.layla/yestore' agar connected antara pws dengan lokal
-    7. Menjalankan perintah 'git branch -M master' dan 'git push pws master' agar kode di lokal bisa diupdate ke pws dan dilihat web nya di internet
-    8. Menjalankan 'git branch -M main' agar branch utama kembali lagi menjadi 'main'
-    9. Untuk kedepannya ketika saya melakukan perubahan, setelah push di GitHub, saya tinggal melakukan perintah 'git push pws main:master' untuk push di PWS.
-    10. Deployment selesai. Tampilan web di local host dan di PWS seharusnya sama.
+    - Sebelum ke PWS, saya melakukan 'git add .', 'git commit -m "<message>"', dan 'git push -u origin main' untuk mengupdate perubahan ke GitHub
+    - Saya mencoba run di local host terlebih dahulu. Jalankan perintah 'manage.py runserver' kemudian saya cek di 'http://localhost:8000/'. Jika halaman yang saya buat sudah muncul, saya lanjut deploy ke PWS
+    - Login di PWS, lalu menambahkan projek baru dengan nama 'yestore'
+    - Buka kembali 'settings.py' kemudian tambahkan 'alyssa-layla-yestore.pbp.cs.ui.ac.id' di 'ALLOWED_HOSTS'
+    - Melakukan kembali 'git add .', 'git commit -m"<messahe>"', dan 'git push -u origin main'
+    - Menjalankan perintah 'git remote add pws http://pbp.cs.ui.ac.id/alyssa.layla/yestore' agar connected antara pws dengan lokal
+    - Menjalankan perintah 'git branch -M master' dan 'git push pws master' agar kode di lokal bisa diupdate ke pws dan dilihat web nya di internet
+    - Menjalankan 'git branch -M main' agar branch utama kembali lagi menjadi 'main'
+    - Untuk kedepannya ketika saya melakukan perubahan, setelah push di GitHub, saya tinggal melakukan perintah 'git push pws main:master' untuk push di PWS.
+    - Deployment selesai. Tampilan web di local host dan di PWS seharusnya sama.
     <hr>
 
 ## Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
 
 ## Jelaskan fungsi git dalam pengembangan perangkat lunak!
-    - Versi Kontrol
-      Git memungkinkan developer untuk melacak perubahan kode. Siapa yang melakukan perubahan, apa yang diubah, dan kapan diubah. Semua itu dapat kita lihat di riwayat pada Git
-    - Kolaborasi
-      Git memudahkan apabila ingin ada kolaborasi antar-developer dalam suatu proyek. Adanya fitur pull, branching, dan merging dapat memudahkan tiap developer untuk mengerjakan proyek kolaborasi secara paralel di waktu yang sama. 
-    - Branching dan Merging
-      Dengan branching, kita dapat push kode tanpa mengubah branch utama. Kemudian apabila diperlukan, kita bisa merging branch tersebut menjadi satu. Hal ini dibutuhkan apabila ingin ada pengembangan fitur baru atau debugging di branch terpisah. Baru setelah selesai, perubahan tersebut dapat di merge ke branch utama
-    - Backup
-      Git menyimpan riwayat perubahan kode di setiap commit yang kita lakukan. Jika kita ingin melihat riwayat perubahan yang kita lakukan, dapat dilakukan dengan melihat riwayat backup kode yang sudah kita commit sebelumnya
+- Versi Kontrol
+Git memungkinkan developer untuk melacak perubahan kode. Siapa yang melakukan perubahan, apa yang diubah, dan kapan diubah. Semua itu dapat kita lihat di riwayat pada Git
+- Kolaborasi
+Git memudahkan apabila ingin ada kolaborasi antar-developer dalam suatu proyek. Adanya fitur pull, branching, dan merging dapat memudahkan tiap developer untuk mengerjakan proyek kolaborasi secara paralel di waktu yang sama. 
+- Branching dan Merging
+Dengan branching, kita dapat push kode tanpa mengubah branch utama. Kemudian apabila diperlukan, kita bisa merging branch tersebut menjadi satu. Hal ini dibutuhkan apabila ingin ada pengembangan fitur baru atau debugging di branch terpisah. Baru setelah selesai, perubahan tersebut dapat di merge ke branch utama
+- Backup
+Git menyimpan riwayat perubahan kode di setiap commit yang kita lakukan. Jika kita ingin melihat riwayat perubahan yang kita lakukan, dapat dilakukan dengan melihat riwayat backup kode yang sudah kita commit sebelumnya
 
 ## Menurut Anda, dari semua framework yang ada, mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?
-    - Django menggunakan bahasa python yang cenderung lebih literal dan lebih mudah dipahami
-    - Django memiliki struktur MVT (Model-View-Template) sehingga memudahkan pemahaman alur pengembangan perangkat lunak. Model untuk interaksi dengan database, View untuk logika aplikasi dan respon terhadap permintaan user, dan Template untuk fokus ke tampilan pengguna (User Interface)
-    - Adanya keamanan yang terintegrasi secara default.
-    - Adanya ORM (Object-Relational Mapping) bawaan. Hal ini mempermudah developer dalam akses database. Developer tidak perlu menulis kode SQL secara langsung. Melainkan, dapat menggunakan python untuk membuat, membaca, dan memodifikasi data.
+- Django menggunakan bahasa python yang cenderung lebih literal dan lebih mudah dipahami
+- Django memiliki struktur MVT (Model-View-Template) sehingga memudahkan pemahaman alur pengembangan perangkat lunak. Model untuk interaksi dengan database, View untuk logika aplikasi dan respon terhadap permintaan user, dan Template untuk fokus ke tampilan pengguna (User Interface)
+- Adanya keamanan yang terintegrasi secara default.
+- Adanya ORM (Object-Relational Mapping) bawaan. Hal ini mempermudah developer dalam akses database. Developer tidak perlu menulis kode SQL secara langsung. Melainkan, dapat menggunakan python untuk membuat, membaca, dan memodifikasi data.
+
 ## Mengapa model pada Django disebut sebagai ORM?
-    Django disebut ORM atau Object-Relational-Mapping karena ORM menghubungkan objek dalam kode dengan tabel dalam database relasional. Hal ini dikarenakan adanya otomasi query SQL sehingga developer tidak perlu menulis query SQL manual untuk akses ke database. Cukup dengan python saja sudah bisa mengakses dan memanipulasi data di database.
+Django disebut ORM atau Object-Relational-Mapping karena ORM menghubungkan objek dalam kode dengan tabel dalam database relasional. Hal ini dikarenakan adanya otomasi query SQL sehingga developer tidak perlu menulis query SQL manual untuk akses ke database. Cukup dengan python saja sudah bisa mengakses dan memanipulasi data di database.
 
 
 
