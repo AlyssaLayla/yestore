@@ -215,9 +215,7 @@ NPM     : 2306152052
             price = models.IntegerField(name="price")
             quantity = models.IntegerField(name="quantity")
             description = models.TextField(name="description")
-            category = models.CharField(max_length=255, 
-            name="category")
-
+            category = models.CharField(max_length=255, name="category")
         ```
     - Notes: Saya mengisi `models.py` dengan 5 atributes yaitu `name` (CharField), `price` (IntegerField), `quantity` (IntegerFIeld), `description` (TextField), dan `category`(CharField)
 
