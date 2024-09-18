@@ -7,6 +7,331 @@ Kelas   : PBP D
 
 NPM     : 2306152052
 
+<details>
+<summary> <b> Tugas 3: Implementasi Form dan Data Delivery pada Django </b> </summary>
+
+# Pertanyaan
+
+## Jelaskan mengapa kita memerlukan *data delivery* dalam pengimplementasian sebuah platform?
+Dalam mengimplementasikan sebuah platform, diperlukan pengiriman data dari satu komponen ke komponen lainnya. Sebagai contoh: dari database menuju ke-user agar dapat mengakses dan menampilkan data yang diminta user. *Data delivery* dibutuhkan untuk mengoptimalkan dan mengefisiensikan proses pengiriman data, apalagi untuk platform beskala besar. Dengan *data delivery*, dapat membuat proses pengiriman data tepat waktu, sehingga memberikan pengalaman pengguna yang lebih baik, juga keamanan data yang terjamin. Format yang populer digunakan (dan sekarang sedang dipelajari) adalah HTML, XML, dan JSON. 
+
+## Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+PERBEDAAN XML dan JSON:
+1. XML menyimpan data dalam struktur pohon dengan *namespace* untuk kategori data yang berbeda. Sedangkan JSON menggunakan struktur mapping dengan pasangan key-value.
+2. XML memiliki sintaks yang lebih kompleks. Sebagai contoh penggunaan tag pembuka dan penutup `<tag></tag>`. Sedangkan JSON hanya menggunakan kurung kurawal `{}`, kurung siku `[]`, dan titik dua `:` antara nama dan nilai, sehingga lebih ringkas.
+3. XML membutuhkan waktu lebih lama untuk parsing, dikarenakan formatnya yang lebih kompleks. Sedangkan JSON lebih cepat diparsing, dikarenakan strukturnya yang lebih sederhana.
+4. XML tidak dapat diintegrasikan langsung oleh JavaScript tanpa dilakukannya parsing tambahan. Sedangkan JSON didesain agar dapat langsung digunakan oleh JavaScript tanpa memerlukan konversi tambahan.
+5. XML cenderung lebih sulit dibaca, terutama apabila data dan platform yang digunakan besar. Hal ini dikarenakan XML melibatkan lebih banyak tag. Sedangkan JSON lebih mudah dibaca karena struktur lebih ringkas dan sederhana.
+
+Dengan perbedaan yang saya paparkan, dapat kita lihat bahwa JSON lebih sederhana, ringkas, dan efisien. Penggunaan JSON memudahkan *developer* dalam membuat platform dan mengolah datanya. Sehingga dapat dilihat JSON lebih populer daripada XML.
+
+## Jelaskan fungsi dari method `is_valid()` pada form Djangoo dan mengapa kita membutuhkan method tersebut?
+Method is_valid() digunakan untuk melakukan validasi untuk setiap kolom formulir, mengembalikan true jika data valid. Dalam konteks tugas 3, Method is_valid() berfungsi untuk memeriksa apakah data yang dikirimkan oleh pengguna sesuai dengan kebutuhan yang ada di form `ProductEntryForm`(Memastikan fields yanga da pada `forms.py` sesuai dengan yang ada pada `models.py`). Kita membutuhkan method is_valid() untuk memastikan agar tidak ada data yang tidak sesuai yang masuk ke database sistem. Sehingga kita menjaga konsistensi data dan memungkinkan pemberian feedback yang jelas kepada user apabila ada kesalahan.
+
+## Mengapa kita membutuhkan `csrf_token` saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan `csrf_token` pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+- `csrf_token` atau yang disebut *Cross-Site Request Forgery* token untuk melindungi platform dari serangan *Cross-Site Request Forgery*(CSRF). Serangan CSRF adalah ketika penyerang melakukan eksploitasi platform yang membuat pengguna tanpa sadar mengirim sebuah permintaan POST yang tidak diinginkan. Sistem kerjanya adalah penyerang menggunakan/membajak sesi pengguna yang sudah diautentifikasi tanpa sepengetahuan pengguna. Kita membutuhkan `csrf_token` saat membuat form di Django agar mencegah serangan saat sedang pembuatan form dengan adanya permintaan POST palsu.
+- Jika kita tidak menambahkan `csrf_token` maka platform rentan terhadap serangan CSRF. Platform tidak dapat memverifikasi apakah permintaan berasal dari pengguna yang sah atau bukan. Sehingga dapat keamanan pengguna tercancam.
+- Hal ini dapat dimanfaatkan oleh penyerang dengan mengirimkan permintaan yang berbahaya kepada user (misal melakukan transaksi keuangan yang tidak diinginkan dan mengubah kata sandi)
+
+
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekedar mengikuti tutorial).
+
+- Implemetasi Skeleton sebagai Kerangka Views
+    1. Saya membuat direktor baru bernama `templates` di folder utama. Kemudian saya membuat berkas HTML baru yang bernama `base.html`. File `base.html` tersebut diisi dengan kode:
+        ```html
+        {% load static %}
+        <!DOCTYPE html>
+        <html lang="en">
+            <head>
+                <meta charset="UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                {% block meta %} {% endblock meta %}
+            </head>
+
+            <body>
+            {% block content %} {% endblock content %}
+            </body>
+        </html>
+        ```
+        Notes: `{% load static %}` digunakan sebagai template tag dalam Django. `<!DOCTYPE html>` digunakan sebagao pendefinisian jenis dokumen HTML5. 
+
+    2. Kemudian saya menambahkan `[BASE_DIR / 'templates']` pada subbagian `DIRS` dalam bagian `TEMPLATES` yang ada di dalam file `settings.py`. Penambahan yang saya lakukan adalah sebagai berikut:
+        ```python
+        TEMPLATES = [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': [BASE_DIR / 'templates'],
+            'APP_DIRS': True,
+            'OPTIONS': {
+                'context_processors': [
+                    'django.template.context_processors.debug',
+                    'django.template.context_processors.request',
+                    'django.contrib.auth.context_processors.auth',
+                    'django.contrib.messages.context_processors.messages',
+                    ],
+                },
+            },
+        ]
+        ```
+        Notes: Penambahan yang saya lakukan bertujuan agar file `base.html` pada `templates` dijadikan sebagai template tujuan.
+
+    3. Saya mengubah `main.html` yang ada di direktori `main/templates` dengan menambahkan ` {% extends 'base.html' %}` dan `{% block content %}` di awal kode. Kemudian juga menambahkan `{% endblock content %}` di akhir kode. Hal ini mengindikasikan bahwa kita menggunakan `base.html` sebagai template utama dan menginisiasikan dimana *block content* di mulai dan di mana berhenti.
+
+- Menambahkan UUID
+    1. Menambahkan `import uuid` dan `id=` di dalam `main/models.py`. Guna dari menambahkan import UUID ini adalah untuk mengimport modul UUID yang akan memberikan string unik untuk ID sebagai *identifier*. Perubahan yang saya lakukan seperti ini: 
+        ```python
+        from django.db import models
+        import uuid 
+
+        class Product(models.Model):
+            id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+            name = models.CharField(max_length=255, name="name")
+            price = models.IntegerField(name="price")
+            quantity = models.IntegerField(name="quantity", default=0)
+            description = models.TextField(name="description")
+            category = models.CharField(max_length=255, name="category", default="Uncategorized")
+        ```
+        Notes: Pada fields `quantity` dan `category` saya menetapkan default valuenya.
+
+    2. Karena dilakukan perubahan pada models. Maka saya melakukan migrasi model dengan perintah:
+        ```bash
+        python manage.py makemigrations
+        python manage.py migrate
+        ```
+
+- Membuat Form Input Data dan Menampilkannya pada HTML
+    1. Pada direktori `main`, buat file baru bernama `forms.py`. Saya memasukkan kode sebagai berikut:
+        ```python
+        from django.forms import ModelForm
+        from main.models import Product
+    
+        class ProductEntryForm(ModelForm):
+            class Meta:
+            model = Product
+            fields = ["name", "price", "quantity", "description", "category"]
+        ````
+        Notes: Saya mengisi fields sesuai dengan yang ada di `models.py` saya
+    2. Pada direktori `main`, saya membuka `views.py` dan menambahkan `import redirect` dan membuat fungsi baru bernama `create_product_entry` yang menerima parameter `request`. Fungsi ini bertujuan untuk menambahkan input form ke dalam permintaan POST untuk database. Saya juga mengubah fungsi `show_main`. Penambahan kode yang saya lakukan ke `views.py` adalah sebagai berikut:
+        
+        ```python
+        from django.shortcuts import render, redirect
+        from main.models import Product
+        from main.forms import ProductEntryForm
+
+        def show_main(request):
+            products = Product.objects.all()
+            context = {
+                'nama': 'Alyssa Layla Sasti',
+                'kelas': 'PBP D',
+                'npm': 2306152052,
+                'products': products,
+            }
+
+        return render(request, "main.html", context)
+
+        def create_product_entry(request):
+            form = ProductEntryForm(request.POST or None)
+
+            if form.is_valid() and request.method == "POST":
+                form.save()
+                return redirect('main:show_main')
+
+            context = {'form': form}
+        return render(request, "create_product_entry.html", context)
+        ```
+        Notes: Redirect digunakan untuk mengarahkan pengguna ke url tertentu, dalam konteks tugas ini adalah menuju `main:show_main`
+
+    3. Saya menambahkan import fungsi `create_product_entry` ke dalam `urls.py` yang ada di `main` dan menambahlan *path* URL ke dalam *urlpatterns*
+
+        ```python
+        from main.views import show_main, create_product_entry
+
+        urlpatterns = [
+            path('', show_main, name='show_main'),
+            path('create-product-entry', create_product_entry, name='create_product_entry'),
+        ]
+        ````
+    4. Saya membuat file HTML baru dengan nama `create_product_entry.html` pada direktori `main/templates`. Kemudian saya mengisi dengan kode sebagai berikut:
+        ```html
+        {% extends 'base.html' %} 
+        {% block content %}
+        <h1>Add New Product Entry</h1>
+
+        <form method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+            <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Add Product" />
+            </td>
+            </tr>
+        </table>
+        </form>
+
+        {% endblock %}
+        ```
+    5. Menambahkan kode di `main.html` untuk menampilkan data *product* dan button *Add New Product*. Perubahan kode yang saya lakukan adalah sebagai berikut:
+        ```html
+        {% extends 'base.html' %}
+        {% block content %}
+        <h1>Welcome to YESTORE!</h1>
+
+        <h2>Nama Mahasiswa: </h2>
+        <p>{{ nama }}</p>
+        <h2>Kelas: </h2>
+        <p>{{ kelas }}</p>
+        <h2>NPM: </h2>
+        <p>{{ npm }}</p>
+
+        {% if not products %}
+        <p>Belum ada data product pada YESTORE.</p>
+        {% else %}
+        <table>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Description</th>
+            <th>Category</th>
+        </tr>
+
+        {% comment %} 
+        {% endcomment %} 
+        {% for product in products %}
+        <tr>
+            <td>{{product.name}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.description}}</td>
+            <td>{{product.category}}</td>
+        </tr>
+        {% endfor %}
+        </table>
+        {% endif %}
+
+        <br />
+
+        <a href="{% url 'main:create_product_entry' %}">
+        <button>Add New Product</button>
+        </a>
+        {% endblock content %}
+        ```
+    6. Jalankan `python manage.py runserver` kemudian buka  http://localhost:8000/, seharusnya web sudah dapat dibuka dan digunakan
+
+- Mengembalikan Data dalam Bentuk XML
+    1. Menambahkan `import HttpResponse` dan `Serializer` di file `views.py` pada `main`
+        ```python
+        from django.shortcuts import render, redirect
+        from main.models import Product
+        from main.forms import ProductEntryForm
+        from django.http import HttpResponse
+        from django.core import serializers
+        ```
+    2. Membuat fungsi `show_xml` yang menerima parameter `request` disertai *return function* berupa `HttpResponse` masih di file `views.py` pada `main`
+        ```python
+        def show_xml(request):
+        data = Product.objects.all()
+        return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+        ```
+    3. Menambahkan  import `show_xml` dan *path url* ke `urlpatterns` di dalam `urls.py` pada `main` 
+        ```python
+        from main.views import show_main, create_product_entry, show_xml
+        
+        app_name = 'main'
+
+        urlpatterns = [
+            path('', show_main, name='show_main'),
+            path('create-product-entry', create_product_entry, name='create_product_entry'),
+            path('xml/', show_xml, name='show_xml'),
+        ]
+        ```
+    4.  Jalankan `python manage.py runserver` kemudian buka  http://localhost:8000/xml/, seharusnya web sudah dapat dibuka dan digunakan
+
+- Mengembalikan Data dalam Bentuk JSON
+    1. Membuat fungsi `show_json` yang menerima parameter `request` disertai *return function* berupa `HttpResponse` di file `views.py` pada `main`
+        ```python
+        def show_json(request):
+            data = Product.objects.all()
+            return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+        ```
+    2. Menambahkan  import `show_json` dan *path url* ke `urlpatterns` di dalam `urls.py` pada `main`
+        ```python
+        from django.urls import path
+        from main.views import show_main, create_product_entry, show_xml, show_json
+
+        app_name = 'main'
+
+        urlpatterns = [
+            path('', show_main, name='show_main'),
+            path('create-product-entry', create_product_entry, name='create_product_entry'),
+            path('xml/', show_xml, name='show_xml'),
+            path('json/', show_json, name='show_json'),
+        ]
+        ``` 
+    3. Jalankan `python manage.py runserver` kemudian buka  http://localhost:8000/json/, seharusnya web sudah dapat dibuka dan digunakan
+
+
+- Mengembalikan Data Berdasarkan ID dalam Bentuk XML dan JSON
+    1. Membuat fungsi `show_xml_by_id` yang menerima parameter `request` dan `id` disertai *return function* berupa `HttpResponse` di file `views.py` pada `main`
+        ```python
+        def show_xml_by_id(request, id):
+            data = Product.objects.filter(pk=id)
+            return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+        ```
+    2.  Membuat fungsi `show_json_by_id` yang menerima parameter `request` dan `id` disertai *return function* berupa `HttpResponse` di file `views.py` pada `main`
+        ```python
+        def show_json_by_id(request, id):
+            data = Product.objects.filter(pk=id)
+            return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+        ```
+    3. Menambahkan  import `show_xml_by_id`, `show_json_by_id` dan *path url* ke `urlpatterns` di dalam `urls.py` pada `main`
+        ```python
+        from django.urls import path
+        from main.views import show_main, create_product_entry, show_xml, show_json, show_xml_by_id, show_json_by_id
+
+        app_name = 'main'
+
+        urlpatterns = [
+            path('', show_main, name='show_main'),
+            path('create-product-entry', create_product_entry, name='create_product_entry'),
+            path('xml/', show_xml, name='show_xml'),
+            path('json/', show_json, name='show_json'),
+            path('xml/<str:id>/', show_xml_by_id, name='show_xml_by_id'),
+            path('json/<str:id>/', show_json_by_id, name='show_json_by_id'),
+        ]
+        ```
+    4. Jalankan `python manage.py runserver` kemudian buka  http://localhost:8000/xml/(masukkan id) dan http://localhost:8000/json/(masukkan id) sesuai dengan id input product yang diberikan. 
+
+- Push ke git hasil Tugas 3
+    ```bash
+    git add .
+    git commit -m
+    git push -u origin main
+    git push pws main:master
+    ```
+
+# Bukti Screenshot hasil akses URL pada Postman
+1. Localhost
+![Localhost](/localhost.png)
+
+2. Localhost XML
+![Localhost XML](/localhost_xml.png)
+
+3. Localhost JSON
+![Localhost JSON](/localhost_json.png)
+
+4. Localhost XML ID
+![Localhost XML ID](/localhost_xml_id.png)
+
+5. Localhost JSON ID
+![Localhost JSON ID](/localhost_json_id.png)
+</details>
+
+<details>
+<summary> <b> Tugas 2: Implementasi Model-View-Template (MVT) pada Django </b> </summary>
+
 # Pertanyaan
 
 ## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekedar mengikuti tutorial)!
@@ -296,7 +621,7 @@ NPM     : 2306152052
     - Deployment selesai. Tampilan web di local host dan di PWS seharusnya sama.
     <hr>
 
-## Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
+## Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara `urls.py`, `views.py`, `models.py`, dan berkas `.html`.
 
 ![Bagan](/bagan.png)
 
@@ -329,3 +654,4 @@ Git menyimpan riwayat perubahan kode di setiap commit yang kita lakukan. Jika ki
 
 ## Mengapa model pada Django disebut sebagai ORM?
 Django disebut ORM atau Object-Relational-Mapping karena ORM menghubungkan objek dalam kode dengan tabel dalam database relasional. Hal ini dikarenakan adanya otomasi query SQL sehingga developer tidak perlu menulis query SQL manual untuk akses ke database. Cukup dengan python saja sudah bisa mengakses dan memanipulasi data di database.
+</details>
