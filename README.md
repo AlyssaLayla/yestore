@@ -31,7 +31,7 @@ Method is_valid() digunakan untuk melakukan validasi untuk setiap kolom formulir
 ## Mengapa kita membutuhkan `csrf_token` saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan `csrf_token` pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
 - `csrf_token` atau yang disebut *Cross-Site Request Forgery* token untuk melindungi platform dari serangan *Cross-Site Request Forgery*(CSRF). Serangan CSRF adalah ketika penyerang melakukan eksploitasi platform yang membuat pengguna tanpa sadar mengirim sebuah permintaan POST yang tidak diinginkan. Sistem kerjanya adalah penyerang menggunakan/membajak sesi pengguna yang sudah diautentifikasi tanpa sepengetahuan pengguna. Kita membutuhkan `csrf_token` saat membuat form di Django agar mencegah serangan saat sedang pembuatan form dengan adanya permintaan POST palsu.
 - Jika kita tidak menambahkan `csrf_token` maka platform rentan terhadap serangan CSRF. Platform tidak dapat memverifikasi apakah permintaan berasal dari pengguna yang sah atau bukan. Sehingga dapat keamanan pengguna tercancam.
-- Hal ini dapat dimanfaatkan oleh penyerang dengan mengirimkan permintaan yang berbahaya kepada user (misal melakukan transaksi keuangan yang tidak diinginkan dan mengubah kata sandi)
+- Hal ini dapat dimanfaatkan oleh penyerang dengan mengirimkan permintaan yang berbahaya kepada user (misal melakukan transaksi keuangan yang tidak diinginkan dan mengubah kata sandi).
 
 
 ## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekedar mengikuti tutorial).
