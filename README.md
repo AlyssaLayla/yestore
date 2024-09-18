@@ -110,7 +110,7 @@ Method is_valid() digunakan untuk melakukan validasi untuk setiap kolom formulir
             model = Product
             fields = ["name", "price", "quantity", "description", "category"]
         ````
-        Notes: Saya mengisi fields sesuai dengan yang ada di `models.py` saya
+        Notes: Saya mengisi fields sesuai dengan yang ada di `models.py` saya.
     2. Pada direktori `main`, saya membuka `views.py` dan menambahkan `import redirect` dan membuat fungsi baru bernama `create_product_entry` yang menerima parameter `request`. Fungsi ini bertujuan untuk menambahkan input form ke dalam permintaan POST untuk database. Saya juga mengubah fungsi `show_main`. Penambahan kode yang saya lakukan ke `views.py` adalah sebagai berikut:
         
         ```python
