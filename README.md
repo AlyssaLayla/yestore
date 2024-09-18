@@ -314,19 +314,19 @@ Method is_valid() digunakan untuk melakukan validasi untuk setiap kolom formulir
 
 # Bukti Screenshot hasil akses URL pada Postman
 1. Localhost
-![Localhost](/localhost.png)
+![Localhost](/images/localhost.png)
 
 2. Localhost XML
-![Localhost XML](/localhost_xml.png)
+![Localhost XML](/images/localhost_xml.png)
 
 3. Localhost JSON
-![Localhost JSON](/localhost_json.png)
+![Localhost JSON](/images/localhost_json.png)
 
 4. Localhost XML ID
-![Localhost XML ID](/localhost_xml_id.png)
+![Localhost XML ID](/images/localhost_xml_id.png)
 
 5. Localhost JSON ID
-![Localhost JSON ID](/localhost_json_id.png)
+![Localhost JSON ID](/images/localhost_json_id.png)
 </details>
 
 <details>
@@ -623,7 +623,7 @@ Method is_valid() digunakan untuk melakukan validasi untuk setiap kolom formulir
 
 ## Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara `urls.py`, `views.py`, `models.py`, dan berkas `.html`.
 
-![Bagan](/bagan.png)
+![Bagan](/images/bagan.png)
 
 - Alur keseluruhan: 
     - Client/user melakukan request -> Internet melanjutkan request -> `urls.py` melanjutkan request berupa route -> `views.py` melanjutkan ke `models.py` dan template `main.html`
