@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block meta %}
-<title>Create Product</title>
+<title>Edit Product</title>
 {% endblock meta %}
 
 {% block content %}
 {% include 'navbar.html' %}
 
+
 <div class="flex flex-col min-h-screen bg-gradient-to-r from-orange-300 to-red-400">
   <div class="container mx-auto px-4 py-8 mt-16 max-w-xl">
-    <h1 class="text-3xl font-bold text-center text-red-600">Add Your Product Here!</h1>
-    <h3 class="text-center text-yellow-300 text-xl mb-6">Manage your product easily with YESTORE</h3>
-  
+    <h1 class="text-3xl font-bold text-center text-red-600">Edit Your Product Here!</h1>
+    <h3 class="text-center text-yellow-300 text-xl mb-6">Update your product information easily</h3>
     <div class="bg-white shadow-md rounded-lg p-6 form-style">
       <form method="POST" class="space-y-6">
         {% csrf_token %}
@@ -31,9 +31,10 @@
             {% endfor %}
           </div>
         {% endfor %}
+  
         <div class="flex justify-center mt-6">
           <button type="submit" class="bg-red-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-red-800 transition duration-300 ease-in-out w-full">
-            Create Product Entry
+            Edit Product Entry
           </button>
         </div>
       </form>
@@ -41,4 +42,4 @@
   </div>
 </div>
 
-{% endblock %}
+{% endblock content %}

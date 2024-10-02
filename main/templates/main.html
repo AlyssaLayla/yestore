@@ -1,51 +1,46 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>YESTORE</title>
+{% endblock meta %}
+
 {% block content %}
-<h1>Welcome to YESTORE!</h1>
+{% include 'navbar.html' %}
 
-<h2>Nama Mahasiswa: </h2>
-<p>{{ nama }}</p>
-<h2>Kelas: </h2>
-<p>{{ kelas }}</p>
-<h2>NPM: </h2>
-<p>{{ npm }}</p>
+<div class="overflow-x-hidden px-4 md:px-8 pb-8 pt-24 min-h-screen bg-gradient-to-r from-orange-300 to-red-400 flex flex-col">
+  <div class="p-2 mb-6 relative z-10"> 
+    <div class="relative grid grid-cols-1 md:grid-cols-3 gap-8 z-30">
+      {% include "card_info.html" with title='NPM' value=npm %}
+      {% include "card_info.html" with title='Name' value=nama %}
+      {% include "card_info.html" with title='Class' value=kelas %}
+    </div>
+  </div>
 
-{% if not products %}
-<p>Belum ada data product pada YESTORE.</p>
-{% else %}
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Price</th>
-    <th>Quantity</th>
-    <th>Description</th>
-    <th>Category</th>
-  </tr>
+  <div class="px-3 mb-4 z-10">
+    <div class="flex rounded-md items-center bg-red-600 py-2 px-4 w-fit">
+      <h1 class="text-white text-center">Last Login: {{ last_login }}</h1>
+    </div>
+  </div>
 
-  {% comment %} 
-  {% endcomment %} 
-  {% for product in products %}
-  <tr>
-    <td>{{product.name}}</td>
-    <td>{{product.price}}</td>
-    <td>{{product.quantity}}</td>
-    <td>{{product.description}}</td>
-    <td>{{product.category}}</td>
-  </tr>
-  {% endfor %}
-</table>
-{% endif %}
+  <div class="flex justify-end mb-6 z-20"> 
+    <a href="{% url 'main:create_product_entry' %}" class="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+      Add New Product Entry
+    </a>
+  </div>
 
-<br />
+  {% if not products %}
+    <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
+      <img src="{% static 'image/noneproduct.png' %}" alt="Product belum ada" class="w-32 h-32 mb-4"/>
+      <p class="text-center text-gray-600 mt-4">Belum ada data produk.</p>
+    </div>
+  {% else %}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+      {% for product in products %}
+        {% include 'card_product.html' with product=product %}
+      {% endfor %}
+    </div>
+  {% endif %}
 
-<a href="{% url 'main:create_product_entry' %}">
-  <button>Add New Product</button>
-</a>
-
-
-<a href="{% url 'main:logout' %}">
-  <button>Logout</button>
-</a>
-
-<h5>Sesi terakhir login: {{ last_login }}</h5>
-
+</div>
 {% endblock content %}
