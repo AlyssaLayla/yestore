@@ -9,6 +9,178 @@ NPM     : 2306152052
 
 
 <details>
+<summary> <b> Tugas 5: Desain Web menggunakan HTML, CSS, dan Framework CSS </b> </summary>
+
+# Pertanyaan
+
+##  Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+1. Inline Style: Ini adalah prioritas tertinggi. Style yang didefinisikan langsung di baris tersebut. Contoh:
+```css
+    <p style="color : red;">
+```
+Notes: Semua teks yang ada di dalam div tersebut akan berwarna merah
+
+2. ID Selector: Style dengan ID selector juga memiliki prioritas tinggi (walauapun tidak setinggi inline style). Contoh:
+```css
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            #main { color: blue; }      
+        </style>
+    </head>
+    <body>
+        <p id="main">Hello World!</p>
+    </body>
+    </html>
+```
+3. Class, Attribute, dan Pseudo-class Selector. Contoh:
+```css
+    <style>
+        .menu { color: green; }            /* Class selector */
+        [type="text"] { color: blue; }     /* Attribute selector */
+        a:hover { color: red; }            /* Pseudo-class selector*/
+    </style>
+
+    <p class="menu">Paragraf pakai kelas 'menu'.</p>
+    <input type="text" value="Text input field">
+    <a href="#">Hover over this link</a>
+```
+
+4. Element Selector (Tag Selector): Pakai elemen seperti h1, p, div, dll. Contoh: 
+```css
+    <style>
+        p { color: red; }  
+    </style>
+
+    <p>Halo semuanya.</p>
+```
+5. Universal Selector *: Memiliki prioritas paling rendah
+```css
+    <style>
+    * { margin: 0; }  /* Universal selector */
+    </style>
+
+    <div>
+    <p>Ini bagian paragraf.</p>
+    <h1>Ini heading.</h1>
+    </div>  
+```
+Referensi: https://revou.co/panduan-teknis/css-selectors
+
+## Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!
+Responsive design dalam pengembangan web menjadi hal yang penting dan krusial. Hal ini dikarenakan, dari sisi pengguna, dalam menggunakan website akan digunakan dalam berbagai ukuran layar. Tidak selalu full page. Dan pengguna tentu mengharapkan kemudahan apabila website dibuka dengan berbagai ukuran di mobile dan dekstop harus dapat berfungsi dan menunjang kebutuhan pengguna dengan baik. Jika tidak, maka pengguna akan kesulitan dan merasa tidak efektif dalam menggunakan website tersebut
+
+Contoh aplikasi yang sudah responsive: Website Netflix, App Store versi website
+Contoh aplikasi yang belum responsive: SIAKNG
+
+
+## Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+- Margin: Ruang di luar elemen border. Margin mengatur jarak elemen dari elemen-elemen di luar batasnya. Margin ini transparan, tidak mempengaruhi konten. Contoh: `margin: 40px;`
+- Border: Garis tepi yang mengelilingi elemen, berada di antara margin dan padding. Biasanya digunakan untuk batas visual elemen. Contoh: `border: 5px solid red`
+- Padding: Padding adalah batas yang paling dekat dengan konten. Ia dalah ruang di dalam elemen, antara konten elemen dengan tepi elemen (border). Padding menambah jarak di dalam elemen sehingga tidak langsung bersinggungan dengan border. Padding ini transparan, hanya menggeser saja. Contoh: `padding: 20px`
+    
+## Jelaskan konsep flex box dan grid layout beserta kegunaannya!
+- Flexbox: Digunakan sebagai container dan items untuk mengatur elemen secara horizontal dan vertikal dalam satu arah utama. Memberikan fleksibilitas tinggi dalam menyusun elemen, terutama jika dinamis.
+- Grid Layout: Bentuknya dua dimensi dan lebih kompleks dari flexbox. Baris dan kolom yang diatur tidak bergantung pada satu arah. Memungkinkan design yang lebih tersttruktur dan presisis dengan  penempatan gridnya
+
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+- Pertama saya mengimplementasikan fungsi hapus dan edit dengan menambahkan di `views.py`
+```python
+    def edit_product(request, id):
+        product = Product.objects.get(pk = id)
+        form = ProductEntryForm(request.POST or None, instance=product)
+
+        if form.is_valid() and request.method == "POST":
+            form.save()
+            return HttpResponseRedirect(reverse('main:show_main'))
+
+        context = {'form': form}
+        return render(request, "edit_product.html", context)
+
+    def delete_product(request, id):
+        product = Product.objects.get(pk = id)
+        product.delete()
+        return HttpResponseRedirect(reverse('main:show_main'))
+```
+
+- Import fungsi dan menambahkan path ke `urls.py`
+    ```python
+    from django.urls import path
+    from main.views import show_main, create_product_entry, show_xml, show_json, show_xml_by_id, show_json_by_id, register, login_user, logout_user, edit_product, delete_product
+
+    app_name = 'main'
+
+    urlpatterns = [
+        path('', show_main, name='show_main'),
+        path('create-product-entry', create_product_entry, name='create_product_entry'),
+        path('xml/', show_xml, name='show_xml'),
+        path('json/', show_json, name='show_json'),
+        path('xml/<str:id>/', show_xml_by_id, name='show_xml_by_id'),
+        path('json/<str:id>/', show_json_by_id, name='show_json_by_id'),
+        path('register/', register, name='register'),
+        path('login/', login_user, name='login'),
+        path('logout/', logout_user, name='logout'),
+        path('edit-product/<uuid:id>', edit_product, name='edit_product'),
+        path('delete/<uuid:id>', delete_product, name='delete_product'),
+    ]
+    ```
+- Ke `main.html` dan menambah fungsionalitas `main:edit_product` dan `main:delete_product` untuk hyperlink di buttonnya
+
+- Membuat folder static css dan image. css untuk membuat global.css dengan isi sebagai berikut:
+```css
+.form-style form input, 
+.form-style form textarea, 
+.form-style form select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px solid #bcbcbc; 
+    border-radius: 0.375rem; 
+    font-size: 1rem; 
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-style form input:focus, 
+.form-style form textarea:focus, 
+.form-style form select:focus {
+    outline: none; 
+    border-color: red; 
+    box-shadow: 0 0  3px red; 
+}
+
+@keyframes shine {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.animate-shine {
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.3));
+    background-size: 200% 100%;
+    animation: shine 3s infinite;
+}
+
+```
+- Tambahkkan tailwind di `base.html`
+```html
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% block meta %} {% endblock meta %}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'css/global.css' %}"/>
+  </head>
+  <body>
+    {% block content %} {% endblock content %}
+  </body>
+</html>
+```
+- Membuat file create_product.html, edit_product.html, card_product.html dan card_info.html dan kustomisasi dengan design yang diinginkan
+</details>
+
+<details>
 <summary> <b> Tugas 4: Implementasi Autentikasi, Session, dan Cookies pada Django </b> </summary>
 
 # Pertanyaan
