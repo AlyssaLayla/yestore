@@ -7,6 +7,22 @@ Kelas   : PBP D
 
 NPM     : 2306152052
 
+<details>
+<summary> <b> Tugas 6: JavaScript dan AJAX </b> </summary>
+
+# Pertanyaan
+
+## Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!
+
+## Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
+
+##  Mengapa kita perlu menggunakan decorator csrf_exempt pada view yang akan digunakan untuk AJAX POST?
+
+## Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
+
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+
+</details>
 
 <details>
 <summary> <b> Tugas 5: Desain Web menggunakan HTML, CSS, dan Framework CSS </b> </summary>
